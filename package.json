@@ -1,6 +1,6 @@
 {
   "name": "command-interface",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A pretty command-line interface helper.",
   "main": "./src/index.js",
   "scripts": {
