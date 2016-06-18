@@ -4,9 +4,11 @@
 A pretty command-line interface helper.
 
 
-## Run
-    npm install
-    npm start
+## Usage Examples
+
+    cd examples
+    node .
+
 
 
 ## Tests
