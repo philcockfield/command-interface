@@ -1,2 +1,2 @@
-import { log } from './util';
-log.info(`\n-- Started --\n\n`);
+import command from './command';
+export default command;
