@@ -1,12 +1,10 @@
-import R from 'ramda';
-import minimist from 'minimist';
-import chalk from 'chalk';
 import { log } from './util';
-const argv = minimist(process.argv.slice(2));
+import * as chalk from 'chalk';
+import * as minimist from 'minimist';
+import * as R from 'ramda';
 
 
-
-
+const argv: any = minimist(process.argv.slice(2));
 const maxStringLength = (strings) => Math.max.apply(null, strings.map(item => item.length));
 
 

@@ -6,7 +6,7 @@ A pretty command-line interface helper.
 
 ## Usage Examples
 
-    cd examples
+    cd lib/examples
     node .
 
 

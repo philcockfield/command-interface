@@ -3,38 +3,35 @@
   "version": "1.0.2",
   "description": "A pretty command-line interface helper.",
   "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
   "scripts": {
     "start": "node .",
-    "watch": "nodemon . -e js,jsx --ignore .build",
-    "test": "./node_modules/mocha/bin/mocha --recursive --compilers js:babel-register",
+    "watch": "nodemon . -e js,jsx --ignore .build src",
+    "test": "./node_modules/mocha/bin/mocha --opts mocha.opts",
     "tdd": "npm run test -- --reporter min --watch",
-    "lint": "./node_modules/eslint/bin/eslint.js --ext .js,.jsx ./src",
-    "build": "./node_modules/babel-cli/bin/babel.js src --out-dir lib --source-maps",
-    "build:watch": "npm run build -- --watch",
+    "lint": "./node_modules/tslint/bin/tslint src/*.ts{,x} src/**/*.ts{x}",
+    "build": "./node_modules/typescript/bin/tsc",
     "prepublish": "npm test && npm run lint && npm run build"
   },
   "dependencies": {
-    "js-util-log": "^1.0.1",
+    "js-util-log": "^1.0.2",
     "minimist": "^1.2.0",
     "ramda": "^0.21.0"
   },
   "devDependencies": {
-    "js-babel": "^6.0.5",
-    "js-babel-dev": "^6.0.6",
     "chai": "^3.5.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.5.3",
+    "js-typescript": "^1.0.1"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/philcockfield/command-interface"
   },
-  "keywords": [
-    "cli"
-  ],
+  "keywords": [],
   "author": {
     "name": "Phil Cockfield",
     "email": "phil@cockfield.net",
-    "url": "https://github.com/philcockfield"
+    "url": "https://github.com/philcockfield/modules"
   },
   "homepage": "https://github.com/philcockfield/command-interface",
   "license": "MIT"

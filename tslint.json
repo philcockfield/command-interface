@@ -1,0 +1,14 @@
+{
+  "extends": "tslint:latest",
+  "rulesDirectory": [
+    "./node_modules/tslint-react/rules"
+  ],
+  "rules": {
+    "no-consecutive-blank-lines": false,
+    "object-literal-sort-keys": false,
+    "no-var-requires": false,
+    "quotemark": [true, "single"],
+    "no-console": false,
+    "jsx-no-lambda": true
+  }
+}

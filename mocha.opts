@@ -1,0 +1,4 @@
+--require ./node_modules/ts-node/register
+--watch-extensions tsx,ts
+--recursive
+src/tests/**/*.test.ts{,x}
