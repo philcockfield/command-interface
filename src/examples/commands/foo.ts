@@ -10,8 +10,6 @@ export const args = {
 
 export const validate = (args) => args;
 
-
 export default (args) => {
-  console.log("action", args);
-
+  console.log('action', args, '\n');
 };
