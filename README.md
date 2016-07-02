@@ -6,7 +6,8 @@ A pretty command-line interface helper.
 
 ## Usage Examples
 
-    npm run example
+    cd lib/examples
+    node .
 
 
 
