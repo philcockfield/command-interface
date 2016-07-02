@@ -15,7 +15,7 @@ export const toModulePaths = (param: string): Array<string> => {
   let paths;
   param = param.endsWith('/') ? param += '*' : param;
   if (param.endsWith('*')) {
-    const dir = path.dirname(param);
+    const dir = path.resolve(path.dirname(param));
     paths = fs
       .readdirSync(dir)
       .map(p => path.join(dir, p))
@@ -23,7 +23,7 @@ export const toModulePaths = (param: string): Array<string> => {
   } else {
     paths = [param];
   }
-  return paths.map(p => path.resolve(p));
+  return paths;
 };
 
 
