@@ -23,7 +23,7 @@ export const toModulePaths = (param: string): Array<string> => {
   } else {
     paths = [param];
   }
-  return paths;
+  return paths.map(p => path.resolve(p));
 };
 
 
