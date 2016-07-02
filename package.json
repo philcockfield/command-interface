@@ -5,8 +5,7 @@
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "start": "node .",
-    "watch": "nodemon . -e js,jsx --ignore .build src",
+    "example": "node ./lib/examples",
     "test": "./node_modules/mocha/bin/mocha --opts mocha.opts",
     "tdd": "npm run test -- --reporter min --watch",
     "lint": "./node_modules/tslint/bin/tslint src/*.ts{,x} src/**/*.ts{x}",
