@@ -9,7 +9,7 @@
     "test": "./node_modules/mocha/bin/mocha --opts mocha.opts",
     "tdd": "npm run test -- --reporter min --watch",
     "lint": "./node_modules/tslint/bin/tslint src/*.ts{,x} src/**/*.ts{x}",
-    "build": "./node_modules/typescript/bin/tsc",
+    "build": "rm -rf ./lib && ./node_modules/typescript/bin/tsc",
     "prepublish": "npm test && npm run lint && npm run build"
   },
   "dependencies": {
