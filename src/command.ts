@@ -20,7 +20,7 @@ const printCommandHelp = (name, command: ICommand) => {
   const paramsDisplay = params.map(p => p.name).join(', ');
 
   // Print argument.
-  const maxArgLength = maxStringLength(args.map(item => item.name.length));
+  const maxArgLength = maxStringLength(args.map(item => item.name));
   const logArg = (arg, color) => {
     const argName = `${ arg.name }${ ' '.repeat(maxArgLength) }`.substr(0, maxArgLength);
     log.info(`  ${ log[color](argName) }  ${ arg.description }`);

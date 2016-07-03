@@ -44,7 +44,7 @@ To get details on a specific command:
 
     node . foo -h
 
-![Command Help](https://cloud.githubusercontent.com/assets/185555/16539455/f0c95f12-4097-11e6-94d5-790871cdac89.png)
+![Command Help](https://cloud.githubusercontent.com/assets/185555/16544978/6d9f6b2c-416e-11e6-8574-0ec42bc04e64.png)
 
 
 #### Run a Command
