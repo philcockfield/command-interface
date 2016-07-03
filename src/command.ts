@@ -89,8 +89,10 @@ export default (commands = {}) => {
     // Validate and format the arguments.
     let args = argv;
     args._.shift();
+    args = { params: args._, options: args };
+    delete args.options._;
     if (R.is(Function, command.validate)) {
-      args = command.validate(argv);
+      args = command.validate(args);
     }
 
     // Invoke the command.

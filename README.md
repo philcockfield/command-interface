@@ -49,9 +49,18 @@ To get details on a specific command:
 
 #### Run a Command
 
-    node . foo param1 flag=123
+    node . foo param1 flag=123 -f
 
-The parameter and flag arguments are passed to the command function as the `args` parameter.  See [minimist](https://github.com/substack/minimist) for more.
+The parameter and option arguments are passed to the command function as the `args` parameter.  
+
+```js
+{
+  args: ['param1'],
+  options: { flag: 123, f: true },
+}
+```
+
+See [minimist](https://github.com/substack/minimist) for more.
 
 ## Example
 
