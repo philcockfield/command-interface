@@ -1,5 +1,5 @@
 import init from './init';
-import { log, exec } from './util';
+import { exec, log } from './util';
 
 export { log, exec };
 export default init;
