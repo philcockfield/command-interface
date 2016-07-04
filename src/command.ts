@@ -10,7 +10,10 @@ const maxStringLength = (strings) => Math.max.apply(null, strings.map(item => it
 
 
 
-const printCommandHelp = (name, command: ICommand) => {
+/**
+ * Prints the help output for a single command.
+ */
+function printCommandHelp(name, command: ICommand) {
   // Format sets of argument (params/flags).
   const args = Object
     .keys(command.args || {})
@@ -45,14 +48,17 @@ const printCommandHelp = (name, command: ICommand) => {
   }
 
   log.info();
-};
+}
 
 
 
-const printCommands = (commands) => {
+
+/**
+ * Prints a set of commands to screen.
+ */
+function printCommands(commands) {
   const commandNames = Object.keys(commands).sort();
   const maxNameLength = maxStringLength(commandNames);
-
   log.info();
   log.info.cyan('Commands:\n');
   commandNames.forEach(name => {
@@ -61,7 +67,7 @@ const printCommands = (commands) => {
     log.info(`  ${ log.blue(paddedName) }  ${ log.gray(description || 'No description.') }`);
   });
   log.info();
-};
+}
 
 
 

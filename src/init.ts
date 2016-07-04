@@ -11,7 +11,7 @@ import * as R from 'ramda';
  * Converts a parameter string passed to the module to a
  * set of module paths.
  */
-export const toModulePaths = (param: string): Array<string> => {
+function toModulePaths(param: string): Array<string> {
   let paths;
   param = param.endsWith('/') ? param += '*' : param;
   if (param.endsWith('*')) {
@@ -24,7 +24,7 @@ export const toModulePaths = (param: string): Array<string> => {
     paths = [param];
   }
   return paths;
-};
+}
 
 
 
@@ -32,7 +32,7 @@ export const toModulePaths = (param: string): Array<string> => {
 /**
  * Loads a set of modules and constructs a command object.
  */
-const toCommand = (modulePath: string): ICommand => {
+function toCommand(modulePath: string): ICommand {
   const m = require(modulePath);
   const name = m.name ? m.name : path.basename(modulePath, '.js');
   return {
@@ -42,7 +42,7 @@ const toCommand = (modulePath: string): ICommand => {
     validate: <IValidate> m.validate,
     action: <IAction> m.default,
   };
-};
+}
 
 
 
@@ -50,14 +50,14 @@ const toCommand = (modulePath: string): ICommand => {
 /**
  * Loads a set of modules and constructs a command object.
  */
-const toCommands = (modulePaths: Array<string>) => {
+function toCommands(modulePaths: Array<string>) {
   const result = {};
   modulePaths
     .map(toCommand)
     .filter(item => R.is(Function, item.action))
     .forEach(cmd => result[cmd.name] = cmd);
   return result;
-};
+}
 
 
 

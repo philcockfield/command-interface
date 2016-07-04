@@ -20,7 +20,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.5.3",
-    "js-typescript": "^1.0.1"
+    "js-typescript": "^1.0.2"
   },
   "repository": {
     "type": "git",
