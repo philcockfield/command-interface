@@ -28,14 +28,13 @@ function toModulePaths(param: string): Array<string> {
     // Just the JS files.
     paths = items.filter(p => p.endsWith('.js'));
 
-    // Deep wild-card specified, search child folders.
+    // Deep wild-card specified, search child-folders (RECURSION).
     if (param.endsWith('**')) {
       const children = items
         .filter(p => isDirectory(p))
-        .map(p => toModulePaths(fsPath.join(p, '**')))
-
+        .map(p => toModulePaths(fsPath.join(p, '**')));
       paths.push(children);
-      paths = R.flatten(paths)
+      paths = R.flatten(paths);
     }
 
   } else {

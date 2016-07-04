@@ -9,6 +9,7 @@
     "no-var-requires": false,
     "quotemark": [true, "single"],
     "no-console": false,
-    "jsx-no-lambda": true
+    "jsx-no-lambda": true,
+    "no-shadowed-variable": false
   }
 }
