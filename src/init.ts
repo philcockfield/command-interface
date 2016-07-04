@@ -56,6 +56,7 @@ function toCommand(modulePath: string): ICommand {
   return {
     name,
     description: m.description,
+    group: m.group,
     args: m.args,
     validate: <IValidate> m.validate,
     action: <IAction> m.default,
@@ -69,11 +70,14 @@ function toCommand(modulePath: string): ICommand {
  * Loads a set of modules and constructs a command object.
  */
 function toCommands(modulePaths: Array<string>) {
-  const result = {};
-  modulePaths
+  // Retrieve and sort paths.
+  let commands = modulePaths
     .map(toCommand)
-    .filter(item => R.is(Function, item.action))
-    .forEach(cmd => result[cmd.name] = cmd);
+    .filter(item => R.is(Function, item.action));
+
+  // Convert to an object.
+  const result = {};
+  commands.forEach(cmd => result[cmd.name] = cmd);
   return result;
 }
 

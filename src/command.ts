@@ -1,5 +1,5 @@
 import { ICommand } from './interfaces';
-import { log } from './util';
+import { DEFAULT_GROUP, log, toGroupedCommands } from './util';
 import * as chalk from 'chalk';
 import * as minimist from 'minimist';
 import * as R from 'ramda';
@@ -59,16 +59,29 @@ function printCommandHelp(name, command: ICommand) {
 function printCommands(commands) {
   const commandNames = Object.keys(commands).sort();
   const maxNameLength = maxStringLength(commandNames);
-  log.info();
-  log.info.cyan('Commands:\n');
   commandNames.forEach(name => {
     const { description } = commands[name];
     const paddedName = `${ name }${ ' '.repeat(maxNameLength) }`.substr(0, maxNameLength);
     log.info(`  ${ log.blue(paddedName) }  ${ log.gray(description || 'No description.') }`);
   });
-  log.info();
 }
 
+
+
+/**
+ * Prints the list of commands within groups.
+ */
+function printGroups(commands) {
+  const groups = toGroupedCommands(commands);
+  Object.keys(groups).forEach(group => {
+    if (group !== DEFAULT_GROUP) {
+      log.info();
+      log.info.gray(` ${ group }`);
+      log.info();
+    }
+    printCommands(groups[group]);
+  });
+}
 
 
 
@@ -83,7 +96,10 @@ export default (commands = {}) => {
 
   if (!command) {
     // No command, print the list available.
-    printCommands(commands);
+    log.info();
+    log.info.cyan('Commands:\n');
+    printGroups(commands);
+    log.info();
 
   } else if (command && helpRequested) {
 

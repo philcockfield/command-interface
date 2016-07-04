@@ -14,6 +14,7 @@ export interface IAction {
 export interface ICommand {
   name: string;
   description?: string;
+  group?: string;
   args?: Object;
   validate?: Function;
   action: Function;
