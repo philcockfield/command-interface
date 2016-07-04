@@ -35,9 +35,19 @@ import command from 'command-interface';
 command('./commands/*');
 ```
 
-This will load all modules within the given directory and produce the following list when run with no command argument:
+This will load all modules directly within the given directory and produce the following list when run with no command argument:
 
 ![Index](https://cloud.githubusercontent.com/assets/185555/16539433/6c7ec6d4-4097-11e6-9cf2-55ff675839f8.png)
+
+To do a deep recursive inclusion of all child directories, use `**`:
+
+```js
+import command from 'command-interface';
+command('./commands/**');
+```
+
+
+
 
 #### Command Help
 To get details on a specific command:

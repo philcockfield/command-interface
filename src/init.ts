@@ -1,9 +1,12 @@
 import command from './command';
 import { IAction, ICommand, IValidate } from './interfaces';
 import * as fs from 'fs';
-import * as path from 'path';
+import * as fsPath from 'path';
 import * as R from 'ramda';
 
+
+
+const isDirectory = (path) => fs.lstatSync(path).isDirectory();
 
 
 
@@ -14,14 +17,30 @@ import * as R from 'ramda';
 function toModulePaths(param: string): Array<string> {
   let paths;
   param = param.endsWith('/') ? param += '*' : param;
+
   if (param.endsWith('*')) {
-    const dir = path.resolve(path.dirname(param));
-    paths = fs
+    // Wild-card, get all files in the folder.
+    const dir = fsPath.resolve(fsPath.dirname(param));
+    const items = fs
       .readdirSync(dir)
-      .map(p => path.join(dir, p))
-      .filter(p => p.endsWith('.js'));
+      .map(p => fsPath.join(dir, p));
+
+    // Just the JS files.
+    paths = items.filter(p => p.endsWith('.js'));
+
+    // Deep wild-card specified, search child folders.
+    if (param.endsWith('**')) {
+      const children = items
+        .filter(p => isDirectory(p))
+        .map(p => toModulePaths(fsPath.join(p, '**')))
+
+      paths.push(children);
+      paths = R.flatten(paths)
+    }
+
   } else {
-    paths = [param];
+    // A single path was specified.  Return it as a single-item array.
+    paths = [fsPath.resolve(param)];
   }
   return paths;
 }
@@ -34,7 +53,7 @@ function toModulePaths(param: string): Array<string> {
  */
 function toCommand(modulePath: string): ICommand {
   const m = require(modulePath);
-  const name = m.name ? m.name : path.basename(modulePath, '.js');
+  const name = m.name ? m.name : fsPath.basename(modulePath, '.js');
   return {
     name,
     description: m.description,

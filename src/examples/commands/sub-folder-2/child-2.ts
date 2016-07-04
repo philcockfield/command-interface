@@ -1,4 +1,3 @@
-
 export default () => {
-  console.log('bar');
+  console.log('child-2');
 };
