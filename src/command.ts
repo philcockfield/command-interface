@@ -97,7 +97,11 @@ export default (commands = {}) => {
 
     // Invoke the command.
     if (args && R.is(Function, command.action)) {
-      command.action(args);
+      try {
+        command.action(args);
+      } catch (err) {
+        log.error(err);
+      }
     }
   }
 };
