@@ -54,6 +54,7 @@ const toCommands = (modulePaths: Array<string>) => {
   const result = {};
   modulePaths
     .map(toCommand)
+    .filter(item => R.is(Function, item.action))
     .forEach(cmd => result[cmd.name] = cmd);
   return result;
 };
