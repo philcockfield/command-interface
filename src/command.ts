@@ -41,7 +41,7 @@ function printCommandHelp(name, command: ICommand) {
     log.info();
   }
 
-  if (params.length > 0) {
+  if (flags.length > 0) {
     log.info.gray('Flags:');
     flags.forEach(arg => logArg(arg, 'cyan'));
     log.info();
