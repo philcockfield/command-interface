@@ -8,7 +8,7 @@ A pretty command-line interface helper.
 Each command is defined within an ES module like so:
 
 ```js
-// commands/foo.js
+// commands/foo.cmd.js
 
 export const name = 'foo';
 export const description = 'A thing that does something.';

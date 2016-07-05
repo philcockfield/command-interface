@@ -52,7 +52,10 @@ function toModulePaths(param: string): Array<string> {
  */
 function toCommand(modulePath: string): ICommand {
   const m = require(modulePath);
-  const name = m.name ? m.name : fsPath.basename(modulePath, '.js');
+  let name;
+  name = m.name ? m.name : fsPath.basename(modulePath, '.js');
+  name = name.endsWith('.cmd') ? fsPath.basename(name, '.cmd') : name;
+
   return {
     name,
     description: m.description,
