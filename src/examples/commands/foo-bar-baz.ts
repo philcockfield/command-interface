@@ -1,7 +1,7 @@
 export const name = 'foo:bar';
 
 export const args = {
-  param: 'A single param.'
+  param: 'A single param.',
 };
 
 
