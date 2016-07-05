@@ -56,13 +56,12 @@ function printCommandHelp(name, command: ICommand) {
 /**
  * Prints a set of commands to screen.
  */
-function printCommands(commands) {
+function printCommands(commands: Object, maxNameLength: number) {
   const commandNames = Object.keys(commands).sort();
-  const maxNameLength = maxStringLength(commandNames);
   commandNames.forEach(name => {
     const { description } = commands[name];
     const paddedName = `${ name }${ ' '.repeat(maxNameLength) }`.substr(0, maxNameLength);
-    log.info(`  ${ log.blue(paddedName) }  ${ log.gray(description || 'No description.') }`);
+    log.info(`   ${ log.blue(paddedName) }  ${ log.gray(description || 'No description.') }`);
   });
 }
 
@@ -71,7 +70,14 @@ function printCommands(commands) {
 /**
  * Prints the list of commands within groups.
  */
-function printGroups(commands) {
+function printGroups(commands: Object) {
+  // Calculate the longest name from all the commands.
+  // This allows spacing to be lined up for all groups.
+  const commandNames = Object.keys(commands);
+  const maxNameLength = maxStringLength(commandNames);
+
+
+  // Put commands into groups then print each group.
   const groups = toGroupedCommands(commands);
   Object.keys(groups).forEach(group => {
     if (group !== DEFAULT_GROUP) {
@@ -79,7 +85,7 @@ function printGroups(commands) {
       log.info.gray(` ${ group }`);
       log.info();
     }
-    printCommands(groups[group]);
+    printCommands(groups[group], maxNameLength);
   });
 }
 
@@ -99,6 +105,7 @@ export default (commands = {}) => {
     log.info();
     log.info.cyan('Commands:\n');
     printGroups(commands);
+    log.info();
     log.info();
 
   } else if (command && helpRequested) {
