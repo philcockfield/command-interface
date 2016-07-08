@@ -127,9 +127,16 @@ export default (commands = {}) => {
     // Invoke the command.
     if (args && R.is(Function, command.action)) {
       try {
-        command.action(args);
+        const result = command.action(args);
+
+        // Log async errors if a Promise was returned.
+        if (R.is(Function, result.catch)) {
+          result.catch(err => log.error(err, '\n'));
+        }
+
       } catch (err) {
-        log.error(err);
+        // Command failed.
+        log.error(err, '\n');
       }
     }
   }

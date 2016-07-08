@@ -1,4 +1,4 @@
-export const group = 'my-group';
+export const group = 'errors';
 
 export default () => {
   throw new Error('My error.');
