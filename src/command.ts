@@ -130,7 +130,7 @@ export default (commands = {}) => {
         const result = command.action(args);
 
         // Log async errors if a Promise was returned.
-        if (R.is(Function, result.catch)) {
+        if (result && R.is(Function, result.catch)) {
           result.catch(err => log.error(err, '\n'));
         }
 
