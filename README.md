@@ -12,6 +12,7 @@ Each command is defined within an ES module like so:
 
 export const name = 'foo';
 export const description = 'A thing that does something.';
+export const alias = 'f' // String or Array.
 export const group = 'Utilities';
 
 export const args = {
