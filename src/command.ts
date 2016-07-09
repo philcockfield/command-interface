@@ -94,6 +94,24 @@ function printGroups(commands: Object) {
 }
 
 
+/**
+ * Looks up the command with the given name/alias.
+ */
+function findCommand(name: string, commands): ICommand {
+  name = name || '';
+  name = name.trim();
+
+  // Look for direct name.
+  if (commands[name]) {
+    return commands[name];
+  }
+  // Look for alias.
+  return Object
+    .keys(commands)
+    .map(key => commands[key])
+    .find(cmd => cmd.alias.includes(name));
+}
+
 
 /**
  * Processes and invokes a command-line instruction.
@@ -101,7 +119,7 @@ function printGroups(commands: Object) {
  */
 export default (commands = {}) => {
   const commandName = argv._[0];
-  const command = commands[commandName];
+  const command = findCommand(commandName, commands);
   const helpRequested = argv.h === true || argv.help === true;
 
   if (!command) {
