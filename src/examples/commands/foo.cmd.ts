@@ -1,6 +1,7 @@
 // export const name = 'another-name';
 
 export const description = 'A thing that does something.';
+export const alias = ['f', 'ff'];
 
 export const args = {
   'param1': 'the first parameter',
@@ -11,5 +12,5 @@ export const args = {
 export const validate = (args) => args;
 
 export default (args) => {
-  console.log('action', args, '\n');
+  console.log('foo', args, '\n');
 };

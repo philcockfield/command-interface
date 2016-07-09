@@ -13,6 +13,7 @@ export interface IAction {
  */
 export interface ICommand {
   name: string;
+  alias: string[];
   description?: string;
   group?: string;
   args?: Object;
