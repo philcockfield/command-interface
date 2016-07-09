@@ -1,4 +1,5 @@
 export const name = 'foo:bar';
+export const alias = 'fb';
 
 export const args = {
   param: 'A single param.',
@@ -6,5 +7,5 @@ export const args = {
 
 
 export default () => {
-  console.log('Action:', name, '\n');
+  console.log(name, '\n');
 };

@@ -56,8 +56,13 @@ function toCommand(modulePath: string): ICommand {
   name = m.name ? m.name : fsPath.basename(modulePath, '.js');
   name = name.endsWith('.cmd') ? fsPath.basename(name, '.cmd') : name;
 
+  let alias = m.alias;
+  if (!R.is(Array, alias)) { alias = [alias]; }
+  alias = R.reject(R.isNil)(alias);
+
   return {
     name,
+    alias,
     description: m.description,
     group: m.group,
     args: m.args,

@@ -59,8 +59,12 @@ function printCommandHelp(name, command: ICommand) {
 function printCommands(commands: Object, maxNameLength: number) {
   const commandNames = Object.keys(commands).sort();
   commandNames.forEach(name => {
-    const { description } = commands[name];
-    const paddedName = `${ name }${ ' '.repeat(maxNameLength) }`.substr(0, maxNameLength);
+    const { alias, description } = commands[name];
+    let displayName = name;
+    if (alias.length > 0) {
+      displayName = `${ displayName } (${ alias.join(',') })`;
+    }
+    const paddedName = `${ displayName }${ ' '.repeat(maxNameLength) }`.substr(0, maxNameLength);
     log.info(`   ${ log.blue(paddedName) }  ${ log.gray(description || 'No description.') }`);
   });
 }
@@ -73,8 +77,8 @@ function printCommands(commands: Object, maxNameLength: number) {
 function printGroups(commands: Object) {
   // Calculate the longest name from all the commands.
   // This allows spacing to be lined up for all groups.
-  const commandNames = Object.keys(commands);
-  const maxNameLength = maxStringLength(commandNames);
+  const names = Object.keys(commands);
+  const maxNameLength = maxStringLength(names);
 
 
   // Put commands into groups then print each group.
@@ -90,6 +94,24 @@ function printGroups(commands: Object) {
 }
 
 
+/**
+ * Looks up the command with the given name/alias.
+ */
+function findCommand(name: string, commands): ICommand {
+  name = name || '';
+  name = name.trim();
+
+  // Look for direct name.
+  if (commands[name]) {
+    return commands[name];
+  }
+  // Look for alias.
+  return Object
+    .keys(commands)
+    .map(key => commands[key])
+    .find(cmd => cmd.alias.includes(name));
+}
+
 
 /**
  * Processes and invokes a command-line instruction.
@@ -97,7 +119,7 @@ function printGroups(commands: Object) {
  */
 export default (commands = {}) => {
   const commandName = argv._[0];
-  const command = commands[commandName];
+  const command = findCommand(commandName, commands);
   const helpRequested = argv.h === true || argv.help === true;
 
   if (!command) {
