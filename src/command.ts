@@ -52,6 +52,16 @@ function printCommandHelp(name, command: ICommand) {
 
 
 
+function toDisplayName(command: ICommand) {
+  const { alias, name } = command;
+  let displayName = name;
+  if (alias.length > 0) {
+    displayName = `${ displayName } (${ alias.join(',') })`;
+  }
+  return displayName;
+}
+
+
 
 /**
  * Prints a set of commands to screen.
@@ -59,11 +69,9 @@ function printCommandHelp(name, command: ICommand) {
 function printCommands(commands: Object, maxNameLength: number) {
   const commandNames = Object.keys(commands).sort();
   commandNames.forEach(name => {
+    const command = commands[name];
     const { alias, description } = commands[name];
-    let displayName = name;
-    if (alias.length > 0) {
-      displayName = `${ displayName } (${ alias.join(',') })`;
-    }
+    const displayName = toDisplayName(command);
     const paddedName = `${ displayName }${ ' '.repeat(maxNameLength) }`.substr(0, maxNameLength);
     log.info(`   ${ log.blue(paddedName) }  ${ log.gray(description || 'No description.') }`);
   });
@@ -77,9 +85,8 @@ function printCommands(commands: Object, maxNameLength: number) {
 function printGroups(commands: Object) {
   // Calculate the longest name from all the commands.
   // This allows spacing to be lined up for all groups.
-  const names = Object.keys(commands);
-  const maxNameLength = maxStringLength(names);
-
+  const displayNames = Object.keys(commands).map(k => toDisplayName(commands[k]));
+  const maxNameLength = maxStringLength(displayNames);
 
   // Put commands into groups then print each group.
   const groups = toGroupedCommands(commands);
@@ -92,6 +99,7 @@ function printGroups(commands: Object) {
     printCommands(groups[group], maxNameLength);
   });
 }
+
 
 
 /**
