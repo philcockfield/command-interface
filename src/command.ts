@@ -70,7 +70,7 @@ function printCommands(commands: Object, maxNameLength: number) {
   const commandNames = Object.keys(commands).sort();
   commandNames.forEach(name => {
     const command = commands[name];
-    const { alias, description } = commands[name];
+    const { description } = command;
     const displayName = toDisplayName(command);
     const paddedName = `${ displayName }${ ' '.repeat(maxNameLength) }`.substr(0, maxNameLength);
     log.info(`   ${ log.blue(paddedName) }  ${ log.gray(description || 'No description.') }`);
