@@ -13,6 +13,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [2.2.0] - 2016-07-09
+#### Added
+- Command aliases.
+
+
+
 ## [2.0.0] - 2016-06-02
 #### Changed
 - Loading commands from modules.  Initialized from a directory path
