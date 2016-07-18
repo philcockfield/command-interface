@@ -60,6 +60,8 @@ function toCommand(modulePath: string): ICommand {
   if (!R.is(Array, alias)) { alias = [alias]; }
   alias = R.reject(R.isNil)(alias);
 
+  const action = m.cmd || m.default;
+
   return {
     name,
     alias,
@@ -67,7 +69,7 @@ function toCommand(modulePath: string): ICommand {
     group: m.group,
     args: m.args,
     validate: <IValidate> m.validate,
-    action: <IAction> m.default,
+    action: <IAction> action,
   };
 }
 

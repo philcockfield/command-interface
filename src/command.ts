@@ -152,6 +152,7 @@ export default (commands = {}) => {
     const args = argv;
     args._.shift();
     let commandArgs: ICommandArgs = { params: args._, options: args };
+    delete args._;
     if (R.is(Function, command.validate)) {
       commandArgs = command.validate(commandArgs);
     }

@@ -30,6 +30,15 @@ export default (args) {
 
 All exports are optional. If a `name` is omitted the name of the module is assumed.  The only thing you really need is the `default export` function to invoke when the command is run.
 
+If you don't wish to export the command as a default export, your can export a function named `cmd`, eg:
+
+```js
+export async function cmd(args) {
+  // Run the command.
+}
+```
+
+
 To initialize the commands, from the entry point of your module pass the path to the folder containing your command modules:
 
 ```js
