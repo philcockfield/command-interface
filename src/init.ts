@@ -1,5 +1,5 @@
 import command from './command';
-import { IAction, ICommand, IValidate } from './interfaces';
+import { IAction, ICommand, IValidate } from './types';
 import * as fs from 'fs';
 import * as fsPath from 'path';
 import * as R from 'ramda';

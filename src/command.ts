@@ -1,4 +1,4 @@
-import { ICommand } from './interfaces';
+import { ICommand, ICommandArgs } from './types';
 import { DEFAULT_GROUP, log, toGroupedCommands } from './util';
 import * as chalk from 'chalk';
 import * as minimist from 'minimist';
@@ -9,10 +9,6 @@ const maxStringLength = (strings) => Math.max.apply(null, strings.map(item => it
 
 
 
-export interface ICommandArgs {
-  params: Array<string>;
-  options: Object;
-}
 
 
 
@@ -156,7 +152,6 @@ export default (commands = {}) => {
     const args = argv;
     args._.shift();
     let commandArgs: ICommandArgs = { params: args._, options: args };
-    delete args.options._;
     if (R.is(Function, command.validate)) {
       commandArgs = command.validate(commandArgs);
     }

@@ -1,4 +1,4 @@
-// export const name = 'another-name';
+import { ICommandArgs } from '../../';
 
 export const description = 'A thing that does something.';
 export const alias = ['f', 'ff'];
@@ -9,8 +9,8 @@ export const args = {
   '--foo': 'a boolean flag',
 };
 
-export const validate = (args) => args;
+export const validate = (args: ICommandArgs) => args;
 
-export default (args) => {
+export default (args: ICommandArgs) => {
   console.log('foo', args, '\n');
 };
