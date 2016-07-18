@@ -1,6 +1,6 @@
 {
   "name": "command-interface",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "A pretty command-line interface from ES6 modules.",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
