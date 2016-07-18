@@ -9,6 +9,13 @@ const maxStringLength = (strings) => Math.max.apply(null, strings.map(item => it
 
 
 
+export interface ICommandArgs {
+  params: Array<string>;
+  options: Object;
+}
+
+
+
 
 /**
  * Prints the help output for a single command.
@@ -146,18 +153,18 @@ export default (commands = {}) => {
   } else {
 
     // Validate and format the arguments.
-    let args = argv;
+    const args = argv;
     args._.shift();
-    args = { params: args._, options: args };
+    let commandArgs: ICommandArgs = { params: args._, options: args };
     delete args.options._;
     if (R.is(Function, command.validate)) {
-      args = command.validate(args);
+      commandArgs = command.validate(commandArgs);
     }
 
     // Invoke the command.
-    if (args && R.is(Function, command.action)) {
+    if (commandArgs && R.is(Function, command.action)) {
       try {
-        const result = command.action(args);
+        const result = command.action(commandArgs);
 
         // Log async errors if a Promise was returned.
         if (result && R.is(Function, result.catch)) {
