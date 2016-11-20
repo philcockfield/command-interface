@@ -39,7 +39,7 @@ function toModulePaths(param: string): Array<string> {
 
   } else {
     // A single path was specified.  Return it as a single-item array.
-    paths = [fsPath.resolve(param)];
+    paths = [ fsPath.resolve(param) ];
   }
   return paths;
 }
@@ -57,7 +57,7 @@ function toCommand(modulePath: string): ICommand {
   name = name.endsWith('.cmd') ? fsPath.basename(name, '.cmd') : name;
 
   let alias = m.alias;
-  if (!R.is(Array, alias)) { alias = [alias]; }
+  if (!R.is(Array, alias)) { alias = [ alias ]; }
   alias = R.reject(R.isNil)(alias);
 
   const action = m.cmd || m.default;
@@ -68,8 +68,8 @@ function toCommand(modulePath: string): ICommand {
     description: m.description,
     group: m.group,
     args: m.args,
-    validate: <IValidate> m.validate,
-    action: <IAction> action,
+    validate: m.validate as IValidate,
+    action: action as IAction,
   };
 }
 
@@ -87,19 +87,31 @@ function toCommands(modulePaths: Array<string>) {
 
   // Convert to an object.
   const result = {};
-  commands.forEach(cmd => result[cmd.name] = cmd);
+  commands.forEach(cmd => result[ cmd.name ] = cmd);
   return result;
 }
 
 
+function pathToCommands(path: string) {
+  const paths = toModulePaths(path);
+  return toCommands(paths);
+
+}
 
 
-export default (param) => {
+export default (param: string | string[] | { [ key: string ]: ICommand }) => {
   // A string was passed, assume it was a path or path-pattern.
   // Convert it to a command object.
-  if (R.is(String, param)) {
-    const paths = toModulePaths(param);
-    param = toCommands(paths);
+  if (typeof param === 'string') {
+    param = pathToCommands(param);
+  }
+
+  if (Array.isArray(param)) {
+    let out = {};
+    param.forEach(path => {
+      out = R.merge(out, pathToCommands(path));
+    });
+    param = out;
   }
 
   // Process commands.
