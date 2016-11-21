@@ -25,7 +25,7 @@ function toModulePaths(param: string): Array<string> {
       .readdirSync(dir)
       .map(p => fsPath.join(dir, p));
 
-    // Just the JS files.
+    // Just the JS or TS files.
     paths = items.filter(p => p.endsWith('.js') || p.endsWith('.ts'));
 
     // Deep wild-card specified, search child-folders (RECURSION).
@@ -106,6 +106,8 @@ export default (param: string | string[] | { [key: string]: ICommand }) => {
     param = pathToCommands(param);
   }
 
+  // A list of string was passed, assuming it was a list of path/patterns.
+  // Merge all the cmds found into one command object. Later cmds override earlier commands.
   if (Array.isArray(param)) {
     let out = {};
     param.forEach(path => {
