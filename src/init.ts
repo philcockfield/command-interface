@@ -26,7 +26,7 @@ function toModulePaths(param: string): Array<string> {
       .map(p => fsPath.join(dir, p));
 
     // Just the JS files.
-    paths = items.filter(p => p.endsWith('.js'));
+    paths = items.filter(p => p.endsWith('.js') || p.endsWith('.ts'));
 
     // Deep wild-card specified, search child-folders (RECURSION).
     if (param.endsWith('**')) {
@@ -39,7 +39,7 @@ function toModulePaths(param: string): Array<string> {
 
   } else {
     // A single path was specified.  Return it as a single-item array.
-    paths = [ fsPath.resolve(param) ];
+    paths = [fsPath.resolve(param)];
   }
   return paths;
 }
@@ -57,7 +57,7 @@ function toCommand(modulePath: string): ICommand {
   name = name.endsWith('.cmd') ? fsPath.basename(name, '.cmd') : name;
 
   let alias = m.alias;
-  if (!R.is(Array, alias)) { alias = [ alias ]; }
+  if (!R.is(Array, alias)) { alias = [alias]; }
   alias = R.reject(R.isNil)(alias);
 
   const action = m.cmd || m.default;
@@ -87,7 +87,7 @@ function toCommands(modulePaths: Array<string>) {
 
   // Convert to an object.
   const result = {};
-  commands.forEach(cmd => result[ cmd.name ] = cmd);
+  commands.forEach(cmd => result[cmd.name] = cmd);
   return result;
 }
 
@@ -99,7 +99,7 @@ function pathToCommands(path: string) {
 }
 
 
-export default (param: string | string[] | { [ key: string ]: ICommand }) => {
+export default (param: string | string[] | { [key: string]: ICommand }) => {
   // A string was passed, assume it was a path or path-pattern.
   // Convert it to a command object.
   if (typeof param === 'string') {
