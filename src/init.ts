@@ -25,8 +25,8 @@ function toModulePaths(param: string): Array<string> {
       .readdirSync(dir)
       .map(p => fsPath.join(dir, p));
 
-    // Just the JS files.
-    paths = items.filter(p => p.endsWith('.js'));
+    // Just the JS or TS files.
+    paths = items.filter(p => p.endsWith('.js') || p.endsWith('.ts'));
 
     // Deep wild-card specified, search child-folders (RECURSION).
     if (param.endsWith('**')) {
@@ -68,8 +68,8 @@ function toCommand(modulePath: string): ICommand {
     description: m.description,
     group: m.group,
     args: m.args,
-    validate: <IValidate> m.validate,
-    action: <IAction> action,
+    validate: m.validate as IValidate,
+    action: action as IAction,
   };
 }
 
@@ -91,15 +91,30 @@ function toCommands(modulePaths: Array<string>) {
   return result;
 }
 
+/**
+ * Converts a path/pattern to a command object
+ */
+function pathToCommands(path: string) {
+  const paths = toModulePaths(path);
+  return toCommands(paths);
+}
 
 
-
-export default (param) => {
+export default (param: string | string[] | { [key: string]: ICommand }) => {
   // A string was passed, assume it was a path or path-pattern.
   // Convert it to a command object.
-  if (R.is(String, param)) {
-    const paths = toModulePaths(param);
-    param = toCommands(paths);
+  if (typeof param === 'string') {
+    param = pathToCommands(param);
+  }
+
+  // A list of string was passed, assuming it was a list of path/patterns.
+  // Merge all the cmds found into one command object. Later cmds override earlier commands.
+  if (Array.isArray(param)) {
+    let out = {};
+    param.forEach(path => {
+      out = R.merge(out, pathToCommands(path));
+    });
+    param = out;
   }
 
   // Process commands.
