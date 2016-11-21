@@ -91,11 +91,12 @@ function toCommands(modulePaths: Array<string>) {
   return result;
 }
 
-
+/**
+ * Converts a path/pattern to a command object
+ */
 function pathToCommands(path: string) {
   const paths = toModulePaths(path);
   return toCommands(paths);
-
 }
 
 
