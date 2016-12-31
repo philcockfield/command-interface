@@ -26,7 +26,8 @@ function toModulePaths(param: string): Array<string> {
       .map(p => fsPath.join(dir, p));
 
     // Just the JS or TS files.
-    paths = items.filter(p => p.endsWith('.js') || p.endsWith('.ts'));
+    paths = items
+      .filter(p => p.endsWith('.js') || (p.endsWith('.ts') && !p.endsWith('.d.ts')))
 
     // Deep wild-card specified, search child-folders (RECURSION).
     if (param.endsWith('**')) {
