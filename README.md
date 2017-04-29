@@ -94,6 +94,9 @@ See [minimist](https://github.com/substack/minimist) for more.
 
     npm test
 
+## Usages
+
+- [msync](https://github.com/philcockfield/msync) - A powerful toolkit for building and syncing multiple node-modules in a flexibly defined workspace.
 
 ---
 ### License: MIT
