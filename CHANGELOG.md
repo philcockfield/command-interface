@@ -13,6 +13,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [3.0.0] - 2017-04-30
+#### Changed
+- Converted to using glob patterns to initialize commands.
+
+  ```js
+  import command from 'command-interface';
+  command('./**/*.cmd.js');
+  ```
+
+
+
+
 ## [2.2.0] - 2016-07-09
 #### Added
 - Command aliases.

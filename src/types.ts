@@ -1,14 +1,16 @@
+// tslint:disable callable-types
+
 export interface IValidate {
-  (args: Object): Object;
-};
+  (args: object): object;
+}
 
 export interface IAction {
-  (args: Object): Object;
-};
+  (args: object): object;
+}
 
 export interface ICommandArgs {
-  params: Array<string>;
-  options: Object;
+  params: string[];
+  options: object;
 }
 
 export interface IValidate {
@@ -27,7 +29,7 @@ export interface ICommand {
   alias: string[];
   description?: string;
   group?: string;
-  args?: Object;
+  args?: object;
   validate?: IValidate;
   action: IAction;
-};
+}

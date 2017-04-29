@@ -1,6 +1,6 @@
 {
   "name": "command-interface",
-  "version": "2.4.1",
+  "version": "3.0.0",
   "description": "Build powerful command-line interfaces from simple ES6 modules.",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
@@ -8,19 +8,24 @@
     "example": "node ./lib/examples",
     "test": "./node_modules/mocha/bin/mocha --opts mocha.opts",
     "tdd": "npm run test -- --reporter min --watch",
-    "lint": "./node_modules/tslint/bin/tslint 'src/**/*.ts{,x}' format --verbose",
+    "lint": "node node_modules/tslint/bin/tslint 'src/**/*.ts{,x}' --format verbose",
     "build": "rm -rf ./lib && ./node_modules/typescript/bin/tsc",
     "prepublish": "npm test && npm run lint && npm run build"
   },
   "dependencies": {
+    "glob": "^7.1.1",
     "js-util-log": "^1.0.2",
     "minimist": "^1.2.0",
-    "ramda": "^0.21.0"
+    "ramda": "^0.23.0"
   },
   "devDependencies": {
+    "@types/chai": "^3.5.1",
+    "@types/glob": "^5.0.30",
+    "@types/mocha": "^2.2.41",
+    "@types/ramda": "^0.0.7",
     "chai": "^3.5.0",
-    "mocha": "^2.5.3",
-    "js-typescript": "^1.0.3"
+    "js-typescript": "^2.3.1",
+    "mocha": "^3.3.0"
   },
   "repository": {
     "type": "git",

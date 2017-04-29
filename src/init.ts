@@ -3,48 +3,7 @@ import { IAction, ICommand, IValidate } from './types';
 import * as fs from 'fs';
 import * as fsPath from 'path';
 import * as R from 'ramda';
-
-
-
-const isDirectory = (path) => fs.lstatSync(path).isDirectory();
-
-
-
-/**
- * Converts a parameter string passed to the module to a
- * set of module paths.
- */
-function toModulePaths(param: string): Array<string> {
-  let paths;
-  param = param.endsWith('/') ? param += '*' : param;
-
-  if (param.endsWith('*')) {
-    // Wild-card, get all files in the folder.
-    const dir = fsPath.resolve(fsPath.dirname(param));
-    const items = fs
-      .readdirSync(dir)
-      .map(p => fsPath.join(dir, p));
-
-    // Just the JS or TS files.
-    paths = items
-      .filter(p => p.endsWith('.js') || (p.endsWith('.ts') && !p.endsWith('.d.ts')));
-
-    // Deep wild-card specified, search child-folders (RECURSION).
-    if (param.endsWith('**')) {
-      const children = items
-        .filter(p => isDirectory(p))
-        .map(p => toModulePaths(fsPath.join(p, '**')));
-      paths.push(children);
-      paths = R.flatten(paths);
-    }
-
-  } else {
-    // A single path was specified.  Return it as a single-item array.
-    paths = [fsPath.resolve(param)];
-  }
-  return paths;
-}
-
+import { glob } from './util';
 
 
 
@@ -80,41 +39,45 @@ function toCommand(modulePath: string): ICommand {
 /**
  * Loads a set of modules and constructs a command object.
  */
-function toCommands(modulePaths: Array<string>) {
+function toCommands(modulePaths: string[]) {
   // Retrieve and sort paths.
-  let commands = modulePaths
+  const commands = modulePaths
     .map(toCommand)
-    .filter(item => R.is(Function, item.action));
+    .filter((item) => R.is(Function, item.action));
 
   // Convert to an object.
   const result = {};
-  commands.forEach(cmd => result[cmd.name] = cmd);
+  commands.forEach((cmd) => result[cmd.name] = cmd);
   return result;
 }
+
 
 /**
  * Converts a path/pattern to a command object
  */
-function pathToCommands(path: string) {
-  const paths = toModulePaths(path);
+async function pathToCommands(path: string) {
+  const paths = await glob(path);
   return toCommands(paths);
 }
 
 
-export default (param: string | string[] | { [key: string]: ICommand }) => {
+export default async (param: string | string[] | { [key: string]: ICommand }) => {
   // A string was passed, assume it was a path or path-pattern.
   // Convert it to a command object.
   if (typeof param === 'string') {
-    param = pathToCommands(param);
+    param = await pathToCommands(param);
   }
 
   // A list of string was passed, assuming it was a list of path/patterns.
   // Merge all the cmds found into one command object. Later cmds override earlier commands.
   if (Array.isArray(param)) {
     let out = {};
-    param.forEach(path => {
-      out = R.merge(out, pathToCommands(path));
-    });
+    for (const path of param) {
+      out = {
+        ...out,
+        ...(await pathToCommands(path)),
+      };
+    }
     param = out;
   }
 

@@ -5,10 +5,7 @@ import * as minimist from 'minimist';
 import * as R from 'ramda';
 
 const argv: any = minimist(process.argv.slice(2));
-const maxStringLength = (strings) => Math.max.apply(null, strings.map(item => item.length));
-
-
-
+const maxStringLength = (strings) => Math.max.apply(null, strings.map((item) => item.length));
 
 
 
@@ -20,33 +17,33 @@ function printCommandHelp(name, command: ICommand) {
   // Format sets of argument (params/flags).
   const args = Object
     .keys(command.args || {})
-    .map(k => ({ name: k, description: command.args[k] }));
-  const params = args.filter(item => !item.name.startsWith('-'));
-  const flags = args.filter(item => item.name.startsWith('-'));
-  const paramsDisplay = params.map(p => p.name).join(', ');
+    .map((k) => ({ name: k, description: command.args[k] }));
+  const params = args.filter((item) => !item.name.startsWith('-'));
+  const flags = args.filter((item) => item.name.startsWith('-'));
+  const paramsDisplay = params.map((p) => p.name).join(', ');
 
   // Print argument.
-  const maxArgLength = maxStringLength(args.map(item => item.name));
+  const maxArgLength = maxStringLength(args.map((item) => item.name));
   const logArg = (arg, color) => {
-    const argName = `${ arg.name }${ ' '.repeat(maxArgLength) }`.substr(0, maxArgLength);
-    log.info(`  ${ log[color](argName) }  ${ arg.description }`);
+    const argName = `${arg.name}${' '.repeat(maxArgLength)}`.substr(0, maxArgLength);
+    log.info(`  ${log[color](argName)}  ${arg.description}`);
   };
 
   log.info();
-  log.info(`Usage: ${ log.blue(name) } ${ chalk.magenta(paramsDisplay) }`);
+  log.info(`Usage: ${log.blue(name)} ${chalk.magenta(paramsDisplay)}`);
   log.info.gray('------------------------------------------------------------');
-  log.info(`${ command.description || 'No description.' }`);
+  log.info(`${command.description || 'No description.'}`);
   log.info();
 
   if (params.length > 0) {
     log.info.gray('Parameters:');
-    params.forEach(arg => logArg(arg, 'magenta'));
+    params.forEach((arg) => logArg(arg, 'magenta'));
     log.info();
   }
 
   if (flags.length > 0) {
     log.info.gray('Flags:');
-    flags.forEach(arg => logArg(arg, 'cyan'));
+    flags.forEach((arg) => logArg(arg, 'cyan'));
     log.info();
   }
 
@@ -59,7 +56,7 @@ function toDisplayName(command: ICommand) {
   const { alias, name } = command;
   let displayName = name;
   if (alias.length > 0) {
-    displayName = `${ displayName } (${ alias.join(',') })`;
+    displayName = `${displayName} (${alias.join(',')})`;
   }
   return displayName;
 }
@@ -69,14 +66,14 @@ function toDisplayName(command: ICommand) {
 /**
  * Prints a set of commands to screen.
  */
-function printCommands(commands: Object, maxNameLength: number) {
+function printCommands(commands: object, maxNameLength: number) {
   const commandNames = Object.keys(commands).sort();
-  commandNames.forEach(name => {
+  commandNames.forEach((name) => {
     const command = commands[name];
     const { description } = command;
     const displayName = toDisplayName(command);
-    const paddedName = `${ displayName }${ ' '.repeat(maxNameLength) }`.substr(0, maxNameLength);
-    log.info(`   ${ log.blue(paddedName) }  ${ log.gray(description || 'No description.') }`);
+    const paddedName = `${displayName}${' '.repeat(maxNameLength)}`.substr(0, maxNameLength);
+    log.info(`   ${log.blue(paddedName)}  ${log.gray(description || 'No description.')}`);
   });
 }
 
@@ -85,18 +82,18 @@ function printCommands(commands: Object, maxNameLength: number) {
 /**
  * Prints the list of commands within groups.
  */
-function printGroups(commands: Object) {
+function printGroups(commands: object) {
   // Calculate the longest name from all the commands.
   // This allows spacing to be lined up for all groups.
-  const displayNames = Object.keys(commands).map(k => toDisplayName(commands[k]));
+  const displayNames = Object.keys(commands).map((k) => toDisplayName(commands[k]));
   const maxNameLength = maxStringLength(displayNames);
 
   // Put commands into groups then print each group.
   const groups = toGroupedCommands(commands);
-  Object.keys(groups).forEach(group => {
+  Object.keys(groups).forEach((group) => {
     if (group !== DEFAULT_GROUP) {
       log.info();
-      log.info.gray(` ${ group }`);
+      log.info.gray(` ${group}`);
       log.info();
     }
     printCommands(groups[group], maxNameLength);
@@ -119,8 +116,8 @@ function findCommand(name: string, commands): ICommand {
   // Look for alias.
   return Object
     .keys(commands)
-    .map(key => commands[key])
-    .find(cmd => cmd.alias.includes(name));
+    .map((key) => commands[key])
+    .find((cmd) => cmd.alias.includes(name));
 }
 
 
@@ -164,7 +161,7 @@ export default (commands = {}) => {
 
         // Log async errors if a Promise was returned.
         if (result && R.is(Function, result.catch)) {
-          result.catch(err => log.error(err, '\n'));
+          result.catch((err) => log.error(err, '\n'));
         }
 
       } catch (err) {
