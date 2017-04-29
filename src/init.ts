@@ -75,8 +75,8 @@ export default async (param: string | string[] | { [key: string]: ICommand }) =>
     for (const path of param) {
       out = {
         ...out,
-        ...(await pathToCommands(path))
-      }
+        ...(await pathToCommands(path)),
+      };
     }
     param = out;
   }
