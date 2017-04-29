@@ -39,23 +39,17 @@ export async function cmd(args) {
 ```
 
 
-To initialize the commands, from the entry point of your module pass the path to the folder containing your command modules:
+To initialize the CLI, from the entry point of your module pass a [glob pattern](https://en.wikipedia.org/wiki/Glob_(programming)) representing your JS modules that are commands.  Typically these have a `.cmd.js` suffix:
 
 ```js
 import command from 'command-interface';
-command('./commands/*');
+command('./**/*.cmd.js');
 ```
 
-This will load all modules directly within the given directory and produce the following list when run with no command argument:
+This will load all modules with the `.cmd.js` suffix anywhere within the project and produce the following index list when run with no command argument:
 
 ![Index](https://cloud.githubusercontent.com/assets/185555/16539433/6c7ec6d4-4097-11e6-9cf2-55ff675839f8.png)
 
-To do a deep recursive inclusion of all child directories, use `**`:
-
-```js
-import command from 'command-interface';
-command('./commands/**');
-```
 
 
 

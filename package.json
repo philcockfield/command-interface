@@ -13,17 +13,19 @@
     "prepublish": "npm test && npm run lint && npm run build"
   },
   "dependencies": {
+    "glob": "^7.1.1",
     "js-util-log": "^1.0.2",
     "minimist": "^1.2.0",
     "ramda": "^0.23.0"
   },
   "devDependencies": {
     "@types/chai": "^3.5.1",
+    "@types/glob": "^5.0.30",
     "@types/mocha": "^2.2.41",
     "@types/ramda": "^0.0.7",
     "chai": "^3.5.0",
-    "mocha": "^3.3.0",
-    "js-typescript": "^2.3.1"
+    "js-typescript": "^2.3.1",
+    "mocha": "^3.3.0"
   },
   "repository": {
     "type": "git",
