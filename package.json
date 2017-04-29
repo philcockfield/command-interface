@@ -15,12 +15,15 @@
   "dependencies": {
     "js-util-log": "^1.0.2",
     "minimist": "^1.2.0",
-    "ramda": "^0.21.0"
+    "ramda": "^0.23.0"
   },
   "devDependencies": {
+    "@types/chai": "^3.5.1",
+    "@types/mocha": "^2.2.41",
+    "@types/ramda": "^0.0.7",
     "chai": "^3.5.0",
-    "mocha": "^2.5.3",
-    "js-typescript": "^1.0.3"
+    "mocha": "^3.3.0",
+    "js-typescript": "^2.3.1"
   },
   "repository": {
     "type": "git",
