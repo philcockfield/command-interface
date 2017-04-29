@@ -14,7 +14,7 @@ const isDirectory = (path) => fs.lstatSync(path).isDirectory();
  * Converts a parameter string passed to the module to a
  * set of module paths.
  */
-function toModulePaths(param: string): Array<string> {
+function toModulePaths(param: string): string[] {
   let paths;
   param = param.endsWith('/') ? param += '*' : param;
 
@@ -23,17 +23,17 @@ function toModulePaths(param: string): Array<string> {
     const dir = fsPath.resolve(fsPath.dirname(param));
     const items = fs
       .readdirSync(dir)
-      .map(p => fsPath.join(dir, p));
+      .map((p) => fsPath.join(dir, p));
 
     // Just the JS or TS files.
     paths = items
-      .filter(p => p.endsWith('.js') || (p.endsWith('.ts') && !p.endsWith('.d.ts')));
+      .filter((p) => p.endsWith('.js') || (p.endsWith('.ts') && !p.endsWith('.d.ts')));
 
     // Deep wild-card specified, search child-folders (RECURSION).
     if (param.endsWith('**')) {
       const children = items
-        .filter(p => isDirectory(p))
-        .map(p => toModulePaths(fsPath.join(p, '**')));
+        .filter((p) => isDirectory(p))
+        .map((p) => toModulePaths(fsPath.join(p, '**')));
       paths.push(children);
       paths = R.flatten(paths);
     }
@@ -80,15 +80,15 @@ function toCommand(modulePath: string): ICommand {
 /**
  * Loads a set of modules and constructs a command object.
  */
-function toCommands(modulePaths: Array<string>) {
+function toCommands(modulePaths: string[]) {
   // Retrieve and sort paths.
-  let commands = modulePaths
+  const commands = modulePaths
     .map(toCommand)
-    .filter(item => R.is(Function, item.action));
+    .filter((item) => R.is(Function, item.action));
 
   // Convert to an object.
   const result = {};
-  commands.forEach(cmd => result[cmd.name] = cmd);
+  commands.forEach((cmd) => result[cmd.name] = cmd);
   return result;
 }
 
@@ -112,7 +112,7 @@ export default (param: string | string[] | { [key: string]: ICommand }) => {
   // Merge all the cmds found into one command object. Later cmds override earlier commands.
   if (Array.isArray(param)) {
     let out = {};
-    param.forEach(path => {
+    param.forEach((path) => {
       out = R.merge(out, pathToCommands(path));
     });
     param = out;
