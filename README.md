@@ -1,7 +1,7 @@
-# command-interface
 [![Build Status](https://travis-ci.org/philcockfield/command-interface.svg?branch=master)](https://travis-ci.org/philcockfield/command-interface)
+![Title](https://cloud.githubusercontent.com/assets/185555/25554746/3374e70e-2d29-11e7-9daa-23a189385240.png)
 
-A pretty command-line interface from ES6 modules.
+Build powerful command-line interface from ES6 modules.
 
 
 ## Usage
