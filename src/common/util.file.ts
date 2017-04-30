@@ -1,5 +1,5 @@
 import { Glob } from 'glob';
-import { fs, fsPath, chokidar, Subject } from './libs';
+import { fs, fsPath, chokidar, Subject, jsYaml } from './libs';
 
 
 /**
@@ -45,3 +45,19 @@ export function watch(pattern: string) {
     .on('change', (path: string) => subject.next(path));
   return subject;
 }
+
+
+
+/**
+ * Loads the given file and parses it as YAML.
+ */
+export async function yaml<T>(path: string) {
+  try {
+    const text = (await fs.readFileAsync(path)).toString();
+    return jsYaml.safeLoad(text) as T;
+  } catch (error) {
+    throw new Error(`Failed to load YAML file '${path}'. ${error.message}`);
+  }
+}
+
+
