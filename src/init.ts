@@ -1,5 +1,5 @@
 import command from './command';
-import { R, file, fs, fsPath, IAction, ICommand, IValidate } from './common';
+import { R, file, fsPath, IAction, ICommand, IValidate } from './common';
 
 
 
