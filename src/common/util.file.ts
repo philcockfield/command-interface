@@ -1,5 +1,5 @@
 import { Glob } from 'glob';
-import { fs, fsPath } from './libs';
+import { fs, fsPath, chokidar, Subject } from './libs';
 
 
 /**
@@ -34,3 +34,14 @@ export async function findClosestAncestor(startDir: string, fileName: string) {
 }
 
 
+
+/**
+ * Watches the given file/folder pattern.
+ */
+export function watch(pattern: string) {
+  const subject = new Subject<string>();
+  chokidar
+    .watch(pattern)
+    .on('change', (path: string) => subject.next(path));
+  return subject;
+}
