@@ -1,4 +1,7 @@
 import init from './init';
+export { init }
+export default init;
+
 
 export * from './types';
 export {
@@ -13,4 +16,3 @@ export {
   moment,
   debounce,
 } from './common';
-export default init;
