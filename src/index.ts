@@ -11,5 +11,6 @@ export {
   Subject,
   Observable,
   moment,
+  debounce,
 } from './common';
 export default init;
