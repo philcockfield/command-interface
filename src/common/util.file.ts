@@ -2,12 +2,16 @@ import { Glob } from 'glob';
 import { fs, fsPath, chokidar, Subject, jsYaml } from './libs';
 
 
+export interface IGlobOptions {
+  nodir?: boolean;
+}
+
 /**
  * Matches the given glob pattern as a promise.
  */
-export function glob(pattern: string): Promise<string[]> {
+export function glob(pattern: string, options: IGlobOptions = {}): Promise<string[]> {
   return new Promise<string[]>((resolve, reject) => {
-    new Glob(pattern, {}, (err, matches) => { // tslint:disable-line
+    new Glob(pattern, options, (err, matches) => { // tslint:disable-line
       if (err) {
         reject(err);
       } else {
