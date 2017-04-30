@@ -1,9 +1,5 @@
 import command from './command';
-import { IAction, ICommand, IValidate } from './types';
-import * as fs from 'fs';
-import * as fsPath from 'path';
-import * as R from 'ramda';
-import { glob } from './util';
+import { R, glob, fs, fsPath, IAction, ICommand, IValidate } from './common';
 
 
 

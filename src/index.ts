@@ -1,6 +1,5 @@
 import init from './init';
-import { exec, log } from './util';
 
 export * from './types';
-export { log, exec };
+export { log, table } from './common';
 export default init;
