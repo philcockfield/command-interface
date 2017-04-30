@@ -13,12 +13,14 @@
     "prepublish": "npm test && npm run lint && npm run build"
   },
   "dependencies": {
+    "@types/lodash.debounce": "^4.0.2",
     "chokidar": "^1.6.1",
     "cli-table": "^0.3.1",
     "fs-extra-promise": "^1.0.1",
     "glob": "^7.1.1",
     "js-util-log": "^1.0.2",
     "js-yaml": "^3.8.3",
+    "lodash.debounce": "^4.0.8",
     "minimist": "^1.2.0",
     "moment": "^2.18.1",
     "ramda": "^0.23.0",
