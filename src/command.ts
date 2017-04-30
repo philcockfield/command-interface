@@ -1,5 +1,5 @@
 import { ICommand, ICommandArgs } from './types';
-import { DEFAULT_GROUP, log, toGroupedCommands } from './util';
+import { constants, log, toGroupedCommands } from './common';
 import * as chalk from 'chalk';
 import * as minimist from 'minimist';
 import * as R from 'ramda';
@@ -91,7 +91,7 @@ function printGroups(commands: object) {
   // Put commands into groups then print each group.
   const groups = toGroupedCommands(commands);
   Object.keys(groups).forEach((group) => {
-    if (group !== DEFAULT_GROUP) {
+    if (group !== constants.DEFAULT_GROUP) {
       log.info();
       log.info.gray(` ${group}`);
       log.info();
