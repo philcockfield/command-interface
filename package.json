@@ -13,12 +13,14 @@
     "prepublish": "npm test && npm run lint && npm run build"
   },
   "dependencies": {
+    "@types/inquirer": "^0.0.34",
     "@types/lodash.debounce": "^4.0.2",
     "chokidar": "^1.6.1",
     "cli-table": "^0.3.1",
     "execa": "^0.6.3",
     "fs-extra-promise": "^1.0.1",
     "glob": "^7.1.1",
+    "inquirer": "^3.0.6",
     "js-util-log": "^1.0.2",
     "js-yaml": "^3.8.3",
     "listr": "^0.12.0",

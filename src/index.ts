@@ -4,11 +4,17 @@ export default init;
 
 
 export * from './types';
+
+// Export internal libs.
 export {
-  R,
   log,
   table,
   file,
+} from './common';
+
+// Export external libs (3rd party).
+export {
+  R,
   fs,
   fsPath,
   Subject,
@@ -17,4 +23,5 @@ export {
   debounce,
   listr,
   exec,
-} from './common';
+  inquirer,
+} from './common'
