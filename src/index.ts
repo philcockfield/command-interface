@@ -24,4 +24,4 @@ export {
   listr,
   exec,
   inquirer,
-} from './common'
+} from './common';
