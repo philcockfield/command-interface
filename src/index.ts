@@ -16,4 +16,5 @@ export {
   moment,
   debounce,
   listr,
+  exec,
 } from './common';
