@@ -1,7 +1,6 @@
 import * as constants from './constants';
 import * as childProcess from 'child_process';
-import * as R from 'ramda';
-import { Glob } from 'glob';
+import { R } from './libs';
 
 
 const exec = (cmd) => childProcess.execSync(cmd, { stdio: [0, 1, 2] });
@@ -38,20 +37,4 @@ export function toGroupedCommands(commands) {
 
   // Finish up.
   return grouped;
-}
-
-
-/**
- * Matches the given glob pattern as a promise.
- */
-export function glob(pattern: string): Promise<string[]> {
-  return new Promise<string[]>((resolve, reject) => {
-    new Glob(pattern, {}, (err, matches) => { // tslint:disable-line
-      if (err) {
-        reject(err);
-      } else {
-        resolve(matches);
-      }
-    });
-  });
 }

@@ -1,7 +1,8 @@
 import * as constants from './constants';
+import * as file from './util.file';
 
 
-export { constants };
+export { constants, file };
 export { table } from './util.table';
 export * from './libs';
 export * from './util';

@@ -1,5 +1,5 @@
 import * as R from 'ramda';
-import * as fs from 'fs';
+import * as fs from 'fs-extra-promise';
 import * as fsPath from 'path';
 import log from 'js-util-log';
 

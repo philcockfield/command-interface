@@ -1,5 +1,5 @@
 import init from './init';
 
 export * from './types';
-export { log, table } from './common';
+export { log, table, file, fs, fsPath } from './common';
 export default init;

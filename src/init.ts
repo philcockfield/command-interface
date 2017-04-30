@@ -1,5 +1,5 @@
 import command from './command';
-import { R, glob, fs, fsPath, IAction, ICommand, IValidate } from './common';
+import { R, file, fs, fsPath, IAction, ICommand, IValidate } from './common';
 
 
 
@@ -52,7 +52,7 @@ function toCommands(modulePaths: string[]) {
  * Converts a path/pattern to a command object
  */
 async function pathToCommands(path: string) {
-  const paths = await glob(path);
+  const paths = await file.glob(path);
   return toCommands(paths);
 }
 
