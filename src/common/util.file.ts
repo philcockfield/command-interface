@@ -51,12 +51,26 @@ export function watch(pattern: string) {
 /**
  * Loads the given file and parses it as YAML.
  */
-export async function yaml<T>(path: string) {
+export async function yaml<T>(filePath: string) {
+  // Support both .yml and .yaml file-extensions.
+  let path = '';
+  const subpath = filePath.substring(0, filePath.length - fsPath.extname(filePath).length);
+  const setIfExists = async (ext: string) => {
+    if (path) { return; }
+    const test = `${subpath}${ext}`;
+    path = (await fs.existsAsync(test))
+      ? test
+      : path;
+  };
+  await setIfExists('.yml');
+  await setIfExists('.yaml');
+
+  // Attempt to load the YAML;
   try {
     const text = (await fs.readFileAsync(path)).toString();
     return jsYaml.safeLoad(text) as T;
   } catch (error) {
-    throw new Error(`Failed to load YAML file '${path}'. ${error.message}`);
+    throw new Error(`Failed to load YAML file '${filePath}'. ${error.message}`);
   }
 }
 
