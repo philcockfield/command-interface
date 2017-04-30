@@ -1,36 +1,39 @@
 import { ICommand, ICommandArgs } from './types';
 import { constants, log, toGroupedCommands } from './common';
-import * as chalk from 'chalk';
-import * as minimist from 'minimist';
-import * as R from 'ramda';
+import { minimist, R } from './common';
 
 const argv: any = minimist(process.argv.slice(2));
-const maxStringLength = (strings) => Math.max.apply(null, strings.map((item) => item.length));
+const maxStringLength = (strings: string[]) => Math.max.apply(null, strings.map((item) => item.length));
 
+
+export interface IArgument {
+  name: string;
+  description: string;
+}
 
 
 
 /**
  * Prints the help output for a single command.
  */
-function printCommandHelp(name, command: ICommand) {
+function printCommandHelp(name: string, command: ICommand) {
   // Format sets of argument (params/flags).
-  const args = Object
+  const args: IArgument[] = Object
     .keys(command.args || {})
-    .map((k) => ({ name: k, description: command.args[k] }));
+    .map((k) => ({ name: k, description: command.args ? command.args[k] : '' }));
   const params = args.filter((item) => !item.name.startsWith('-'));
   const flags = args.filter((item) => item.name.startsWith('-'));
   const paramsDisplay = params.map((p) => p.name).join(', ');
 
   // Print argument.
   const maxArgLength = maxStringLength(args.map((item) => item.name));
-  const logArg = (arg, color) => {
+  const logArg = (arg: IArgument, color: string) => {
     const argName = `${arg.name}${' '.repeat(maxArgLength)}`.substr(0, maxArgLength);
     log.info(`  ${log[color](argName)}  ${arg.description}`);
   };
 
   log.info();
-  log.info(`Usage: ${log.blue(name)} ${chalk.magenta(paramsDisplay)}`);
+  log.info(`Usage: ${log.blue(name)} ${log.magenta(paramsDisplay)}`);
   log.info.gray('------------------------------------------------------------');
   log.info(`${command.description || 'No description.'}`);
   log.info();
@@ -105,7 +108,7 @@ function printGroups(commands: object) {
 /**
  * Looks up the command with the given name/alias.
  */
-function findCommand(name: string, commands): ICommand {
+function findCommand(name: string, commands: object): ICommand | undefined {
   name = name || '';
   name = name.trim();
 
@@ -130,13 +133,14 @@ export default (commands = {}) => {
   const command = findCommand(commandName, commands);
   const helpRequested = argv.h === true || argv.help === true;
 
-  if (!command) {
+  if (command === undefined) {
     // No command, print the list available.
     log.info();
     log.info.cyan('Commands:\n');
     printGroups(commands);
     log.info();
     log.info();
+    return;
 
   } else if (command && helpRequested) {
 
@@ -148,9 +152,9 @@ export default (commands = {}) => {
     // Validate and format the arguments.
     const args = argv;
     args._.shift();
-    let commandArgs: ICommandArgs = { params: args._, options: args };
+    let commandArgs: ICommandArgs | undefined = { params: args._, options: args };
     delete args._;
-    if (R.is(Function, command.validate)) {
+    if (command.validate && R.is(Function, command.validate)) {
       commandArgs = command.validate(commandArgs);
     }
 

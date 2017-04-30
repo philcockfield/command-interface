@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
-    "rootDir": "./src",
     "outDir": "./lib",
-    "target": "es6",
-    "sourceMap": true,
+    "target": "es5",
+    "inlineSourceMap": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "isolatedModules": false,
@@ -11,13 +10,29 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "declaration": true,
-    "noImplicitAny": false,
     "removeComments": true,
     "noLib": false,
+    "skipLibCheck": true,
     "preserveConstEnums": true,
     "suppressImplicitAnyIndexErrors": true,
-    "pretty": true
+    "pretty": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "lib": [
+      "es5",
+      "es6",
+      "es7",
+      "dom"
+    ]
   },
+  "include": [
+    "src/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
   "exclude": [
     "node_modules",
     "lib"
