@@ -7,12 +7,12 @@ describe('listr', () => {
     const list = listr([{
       title: 'task-1',
       task: () => undefined,
-    }])
+    }]);
 
     list.add({
       title: 'task-2',
       task: () => undefined,
-    })
+    });
 
     expect((list as any)._tasks.length).to.equal(2);
   });
