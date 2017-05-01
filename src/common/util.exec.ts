@@ -54,3 +54,29 @@ function invoke(cmd: string, options: IRunOptions = {}) {
   // Finish up.
   return promise;
 }
+
+
+/**
+ * Opens a new tab in iTerm and executes the given command.
+ */
+export async function inNewTab(cmd: string, path: string) {
+
+  // Prepare the command to open a new terminal.
+  const command = `osascript -e '
+    if application "iTerm" is running then
+      tell application "iTerm"
+          tell current window
+              create tab with default profile
+              tell current session
+                  write text "cd ${path} && clear && ${cmd}"
+              end tell
+          end tell
+      end tell
+    else
+        activate application "iTerm"
+    end if
+  '`;
+
+  // Execute the command.
+  return run(command, { silent: true });
+}
