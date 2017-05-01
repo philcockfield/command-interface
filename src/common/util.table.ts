@@ -4,14 +4,20 @@ const Table = require('cli-table');
 
 
 
+export interface IOptions {
+  head?: Array<string | undefined>;
+  colWidths?: number[];
+}
+
 
 
 /**
  * Creates a new table builder.
  */
-export function table(head: Array<string | undefined> = []) {
+export function table(options?: IOptions) {
+  let { head = [], colWidths = [] } = options || {};
   head = compact(head);
-  const t = new Table({ head });
+  const t = new Table({ head, colWidths });
   const api = {
     /**
      * Adds a new row to the table.
