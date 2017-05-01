@@ -15,9 +15,11 @@ export interface IOptions {
  * Creates a new table builder.
  */
 export function table(options?: IOptions) {
-  let { head = [], colWidths = [] } = options || {};
-  head = compact(head);
-  const t = new Table({ head, colWidths });
+  const { head = [], colWidths = [] } = options || {};
+  const t = new Table({
+    head: compact(head),
+    colWidths,
+  });
   const api = {
     /**
      * Adds a new row to the table.
