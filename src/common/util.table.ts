@@ -16,7 +16,7 @@ export function table(head: Array<string | undefined> = []) {
     /**
      * Adds a new row to the table.
      */
-    add(...columns: Array<string | undefined>) {
+    add(columns: Array<string | undefined>) {
       t.push(columns.map((row) => row === undefined ? '' : row));
       return api;
     },
