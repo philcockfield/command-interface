@@ -93,3 +93,7 @@ See [minimist](https://github.com/substack/minimist) for more.
 - [msync](https://github.com/philcockfield/msync) - A powerful toolkit for building and syncing multiple node-modules in a flexibly defined workspace.
 
 - [new-file](https://github.com/philcockfield/new-file) - Simple file templates.
+
+
+## Next
+- Update checker

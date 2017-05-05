@@ -8,7 +8,7 @@ export * from './types';
 // Export internal libs.
 export {
   log,
-  table,
+  table, ITable,
   file,
 } from './common';
 

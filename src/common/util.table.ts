@@ -4,17 +4,22 @@ const Table = require('cli-table');
 
 
 
-export interface IOptions {
+export interface ITableOptions {
   head?: Array<string | undefined>;
   colWidths?: number[];
 }
 
+export interface ITable {
+  add: (columns: Array<string | undefined>) => ITable;
+  log: () => ITable;
+  toString: () => string;
+}
 
 
 /**
  * Creates a new table builder.
  */
-export function table(options?: IOptions) {
+export function table(options?: ITableOptions): ITable {
   const { head = [], colWidths = [] } = options || {};
   const t = new Table({
     head: compact(head),
