@@ -10,4 +10,4 @@ import { debounce } from 'lodash';
 
 export { R, fs, fsPath, chokidar, jsYaml, moment, debounce, minimist, inquirer };
 export { Subject, Observable } from 'rxjs';
-export { log } from 'js-util-log';
+export { log } from 'log.server';

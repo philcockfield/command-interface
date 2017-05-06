@@ -13,9 +13,9 @@
     "prepublish": "npm test && npm run lint && npm run build"
   },
   "dependencies": {
+    "@types/fs-extra-promise": "^1.0.0",
     "@types/inquirer": "^0.0.34",
     "@types/lodash.debounce": "^4.0.2",
-    "@types/fs-extra-promise": "^1.0.0",
     "@types/ramda": "^0.0.7",
     "chokidar": "^1.6.1",
     "cli-table": "^0.3.1",
@@ -23,11 +23,11 @@
     "fs-extra-promise": "^1.0.1",
     "glob": "^7.1.1",
     "inquirer": "^3.0.6",
-    "js-util-log": "^1.0.2",
     "js-yaml": "^3.8.3",
     "listr": "^0.12.0",
     "lodash": "^4.17.4",
     "lodash.debounce": "^4.0.8",
+    "log.server": "^2.0.0",
     "minimist": "^1.2.0",
     "moment": "^2.18.1",
     "ramda": "^0.23.0",
