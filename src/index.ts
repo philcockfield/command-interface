@@ -21,7 +21,7 @@ export {
   Observable,
   moment,
   debounce,
-  listr,
+  listr, IListr, IListrOptions, IListrTask,
   exec,
   inquirer,
 } from './common';
