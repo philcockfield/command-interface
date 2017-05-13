@@ -10,6 +10,8 @@ export {
   log,
   table, ITable,
   file,
+  plural,
+  singular,
 } from './common';
 
 // Export external libs (3rd party).
