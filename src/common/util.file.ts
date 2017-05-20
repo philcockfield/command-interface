@@ -4,10 +4,14 @@ import { fs, fsPath, chokidar, Subject, jsYaml } from './libs';
 
 export interface IGlobOptions {
   nodir?: boolean;
+  dot?: boolean;
+  ignore?: string;
 }
 
 /**
  * Matches the given glob pattern as a promise.
+ * See:
+ *    https://www.npmjs.com/package/glob
  */
 export function glob(pattern: string, options: IGlobOptions = {}): Promise<string[]> {
   return new Promise<string[]>((resolve, reject) => {
