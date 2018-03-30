@@ -1,16 +1,17 @@
 {
   "name": "command-interface",
   "version": "3.0.23",
-  "description": "Build powerful command-line interfaces from simple ES6 modules.",
+  "description":
+    "Build powerful command-line interfaces from simple ES6 modules.",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "test": "sh sh/test.sh",
-    "tdd": "yarn run test -- --reporter min --watch",
     "example": "node ./lib/examples",
-    "lint": "node node_modules/tslint/bin/tslint 'src/**/*.ts{,x}' --format verbose",
-    "build": "rm -rf ./lib && ./node_modules/typescript/bin/tsc",
-    "prepublish": "npm test && npm run lint && npm run build"
+    "test": "sh ./node_modules/@tdb/test/sh/test.sh",
+    "tdd": "yarn run test --reporter min --watch",
+    "lint": "sh ./node_modules/@tdb/typescript/sh/lint.sh",
+    "build": "rm -rf ./lib && tsc",
+    "prepare": "yarn run lint && yarn test && yarn run build"
   },
   "dependencies": {
     "@types/fs-extra-promise": "^1.0.0",
@@ -35,15 +36,12 @@
     "rxjs": "^5.3.0"
   },
   "devDependencies": {
-    "@types/chai": "^3.5.1",
+    "@tdb/test": "^1.1.4",
+    "@tdb/typescript": "^2.8.0",
     "@types/chokidar": "^1.6.0",
     "@types/glob": "^5.0.30",
     "@types/js-yaml": "^3.5.30",
-    "@types/minimist": "^1.2.0",
-    "@types/mocha": "^2.2.41",
-    "chai": "^3.5.0",
-    "js-typescript": "^2.3.1",
-    "mocha": "^3.3.0"
+    "@types/minimist": "^1.2.0"
   },
   "repository": {
     "type": "git",

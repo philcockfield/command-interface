@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import * as exec from './util.exec';
 
-
 describe('listr', () => {
   it('invokes a shell command', async () => {
     const result = await exec.run('echo foo');
@@ -9,4 +8,3 @@ describe('listr', () => {
     expect(result.stdout).to.equal('foo');
   });
 });
-

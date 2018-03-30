@@ -8,6 +8,16 @@ import * as minimist from 'minimist';
 import * as inquirer from 'inquirer';
 import { debounce } from 'lodash';
 
-export { R, fs, fsPath, chokidar, jsYaml, moment, debounce, minimist, inquirer };
+export {
+  R,
+  fs,
+  fsPath,
+  chokidar,
+  jsYaml,
+  moment,
+  debounce,
+  minimist,
+  inquirer,
+};
 export { Subject, Observable } from 'rxjs';
 export { log } from 'log.server';

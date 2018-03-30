@@ -14,7 +14,7 @@ export interface IGlobOptions {
  */
 export function glob(
   pattern: string,
-  options: IGlobOptions = {}
+  options: IGlobOptions = {},
 ): Promise<string[]> {
   return new Promise<string[]>((resolve, reject) => {
     new Glob(pattern, options, (err, matches) => {
@@ -39,7 +39,7 @@ export async function findClosestAncestor(startDir: string, fileName: string) {
     const path = fsPath.join(dir, fileName);
     return (await fs.existsAsync(path))
       ? path
-      : await find(fsPath.resolve(dir, '..'));
+      : find(fsPath.resolve(dir, '..'));
   };
   return find(startDir);
 }
@@ -61,7 +61,7 @@ export async function yaml<T>(filePath: string) {
   let path = '';
   const subpath = filePath.substring(
     0,
-    filePath.length - fsPath.extname(filePath).length
+    filePath.length - fsPath.extname(filePath).length,
   );
   const setIfExists = async (ext: string) => {
     if (path) {

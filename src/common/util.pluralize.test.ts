@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import { singular, plural } from './util.pluralize';
 
-
 describe('pluralize', () => {
   it('handles empty-string', () => {
     expect(plural('')).to.equal('');
@@ -25,14 +24,12 @@ describe('pluralize', () => {
     expect(plural('cat', 0)).to.equal('cats');
   });
 
-
   it('does not add "s" to plural of sheep', () => {
     expect(plural('sheep')).to.equal('sheep');
     expect(plural('sheep', 2)).to.equal('sheep');
     expect(plural('sheep', 1)).to.equal('sheep');
     expect(plural('sheep', 0)).to.equal('sheep');
   });
-
 
   it('singularizes a word', () => {
     expect(singular('cows')).to.equal('cow');

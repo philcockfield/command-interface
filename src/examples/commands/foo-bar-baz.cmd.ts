@@ -5,7 +5,6 @@ export const args = {
   param: 'A single param.',
 };
 
-
 export default () => {
-  console.log(name, '\n');
+  console.log(name, '\n'); // tslint:disable-line
 };
