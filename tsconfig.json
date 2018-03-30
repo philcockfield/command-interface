@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "outDir": "./lib",
+    "rootDir": "src",
+    "outDir": "lib",
     "target": "es5",
-    "inlineSourceMap": true,
+    "sourceMap": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "isolatedModules": false,
@@ -21,20 +22,6 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
-    "lib": [
-      "es5",
-      "es6",
-      "es7",
-      "dom"
-    ]
-  },
-  "include": [
-    "src/**/*.d.ts",
-    "src/**/*.ts",
-    "src/**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules",
-    "lib"
-  ]
+    "lib": ["esnext", "dom"]
+  }
 }

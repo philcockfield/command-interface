@@ -6,7 +6,6 @@ export const args = {
   '--force': 'Forces a thing',
 };
 
-
 export default () => {
-  console.log('child-2');
+  console.log('child-2'); // tslint:disable-line
 };

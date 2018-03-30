@@ -1,6 +1,5 @@
 import { Glob } from 'glob';
-import { fs, fsPath, chokidar, Subject, jsYaml } from './libs';
-
+import { fs, fsPath, chokidar, Subject, Observable, jsYaml } from './libs';
 
 export interface IGlobOptions {
   nodir?: boolean;
@@ -13,9 +12,13 @@ export interface IGlobOptions {
  * See:
  *    https://www.npmjs.com/package/glob
  */
-export function glob(pattern: string, options: IGlobOptions = {}): Promise<string[]> {
+export function glob(
+  pattern: string,
+  options: IGlobOptions = {},
+): Promise<string[]> {
   return new Promise<string[]>((resolve, reject) => {
-    new Glob(pattern, options, (err, matches) => { // tslint:disable-line
+    new Glob(pattern, options, (err, matches) => {
+      // tslint:disable-line
       if (err) {
         reject(err);
       } else {
@@ -25,36 +28,30 @@ export function glob(pattern: string, options: IGlobOptions = {}): Promise<strin
   });
 }
 
-
-
 /**
  * Walks up the folder tree looking for the given file.
  */
 export async function findClosestAncestor(startDir: string, fileName: string) {
   const find = async (dir: string): Promise<string | undefined> => {
-    if (!dir || dir === '/') { return; }
+    if (!dir || dir === '/') {
+      return;
+    }
     const path = fsPath.join(dir, fileName);
     return (await fs.existsAsync(path))
       ? path
-      : (await find(fsPath.resolve(dir, '..')));
+      : find(fsPath.resolve(dir, '..'));
   };
   return find(startDir);
 }
 
-
-
 /**
  * Watches the given file/folder pattern.
  */
-export function watch(pattern: string) {
+export function watch(pattern: string): Observable<string> {
   const subject = new Subject<string>();
-  chokidar
-    .watch(pattern)
-    .on('change', (path: string) => subject.next(path));
-  return subject;
+  chokidar.watch(pattern).on('change', (path: string) => subject.next(path));
+  return subject.asObservable();
 }
-
-
 
 /**
  * Loads the given file and parses it as YAML.
@@ -62,13 +59,16 @@ export function watch(pattern: string) {
 export async function yaml<T>(filePath: string) {
   // Support both .yml and .yaml file-extensions.
   let path = '';
-  const subpath = filePath.substring(0, filePath.length - fsPath.extname(filePath).length);
+  const subpath = filePath.substring(
+    0,
+    filePath.length - fsPath.extname(filePath).length,
+  );
   const setIfExists = async (ext: string) => {
-    if (path) { return; }
+    if (path) {
+      return;
+    }
     const test = `${subpath}${ext}`;
-    path = (await fs.existsAsync(test))
-      ? test
-      : path;
+    path = (await fs.existsAsync(test)) ? test : path;
   };
   await setIfExists('.yml');
   await setIfExists('.yaml');
@@ -81,5 +81,3 @@ export async function yaml<T>(filePath: string) {
     throw new Error(`Failed to load YAML file '${filePath}'. ${error.message}`);
   }
 }
-
-
