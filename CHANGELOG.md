@@ -9,6 +9,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 #### Changed
 
+#### Deprecated
+
+#### Removed
+
+#### Fixed
+
+#### Security
+
+---
+
+## [3.0.24] - 2018-03-31
+
+#### Added
+
+#### Changed
+
 * Updated typescript (using @tdb libs)
 
 - Format with Prettier https://github.com/prettier/prettier
