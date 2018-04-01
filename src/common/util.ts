@@ -24,7 +24,7 @@ export function toGroupedCommands(commands: object) {
   groups.forEach(group => {
     const isInGroup = (cmd: ICommand) =>
       (cmd.group || constants.DEFAULT_GROUP) === group;
-    const groupCommands = R.sortBy(
+    const groupCommands = R.sortBy<ICommand>(
       R.prop('name'),
       commandList.filter(isInGroup),
     );
