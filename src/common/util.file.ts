@@ -76,7 +76,8 @@ export async function yaml<T>(filePath: string) {
   // Attempt to load the YAML;
   try {
     const text = (await fs.readFileAsync(path)).toString();
-    return jsYaml.safeLoad(text) as T;
+    const res = jsYaml.safeLoad(text) as any;
+    return res as T;
   } catch (error) {
     throw new Error(`Failed to load YAML file '${filePath}'. ${error.message}`);
   }
