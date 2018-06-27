@@ -13,6 +13,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 #### Removed
 
+- Removed `lodash` export references (namely `debounce`). Use observables instead! :)
+
 #### Fixed
 
 #### Security

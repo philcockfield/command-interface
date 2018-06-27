@@ -15,7 +15,6 @@
   "dependencies": {
     "@types/fs-extra-promise": "1.0.6",
     "@types/inquirer": "0.0.42",
-    "@types/lodash.debounce": "4.0.3",
     "@types/ramda": "0.25.34",
     "chokidar": "2.0.4",
     "execa": "0.10.0",
@@ -24,8 +23,6 @@
     "inquirer": "6.0.0",
     "js-yaml": "3.12.0",
     "listr": "0.14.1",
-    "lodash": "4.17.10",
-    "lodash.debounce": "4.0.8",
     "log.server": "3.0.0",
     "minimist": "1.2.0",
     "moment": "2.22.2",
