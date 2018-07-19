@@ -9,4 +9,4 @@ import * as inquirer from 'inquirer';
 
 export { R, fs, fsPath, chokidar, jsYaml, moment, minimist, inquirer };
 export { Subject, Observable } from 'rxjs';
-export { log } from 'log.server';
+export { log } from '@tdb/log/lib/server';

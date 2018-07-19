@@ -13,6 +13,7 @@
     "prepare": "yarn run lint && yarn test && yarn run build"
   },
   "dependencies": {
+    "@tdb/log": "1.0.0",
     "@types/fs-extra-promise": "1.0.6",
     "@types/inquirer": "0.0.42",
     "@types/ramda": "0.25.34",
@@ -23,7 +24,6 @@
     "inquirer": "6.0.0",
     "js-yaml": "3.12.0",
     "listr": "0.14.1",
-    "log.server": "3.0.0",
     "minimist": "1.2.0",
     "moment": "2.22.2",
     "pluralize": "7.0.0",
