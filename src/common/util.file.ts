@@ -37,9 +37,7 @@ export async function findClosestAncestor(startDir: string, fileName: string) {
       return;
     }
     const path = fsPath.join(dir, fileName);
-    return (await fs.existsAsync(path))
-      ? path
-      : find(fsPath.resolve(dir, '..'));
+    return (await fs.pathExists(path)) ? path : find(fsPath.resolve(dir, '..'));
   };
   return find(startDir);
 }
@@ -68,14 +66,14 @@ export async function yaml<T>(filePath: string) {
       return;
     }
     const test = `${subpath}${ext}`;
-    path = (await fs.existsAsync(test)) ? test : path;
+    path = (await fs.pathExists(test)) ? test : path;
   };
   await setIfExists('.yml');
   await setIfExists('.yaml');
 
   // Attempt to load the YAML;
   try {
-    const text = (await fs.readFileAsync(path)).toString();
+    const text = (await fs.readFile(path)).toString();
     const res = jsYaml.safeLoad(text) as any;
     return res as T;
   } catch (error) {

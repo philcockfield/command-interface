@@ -1,5 +1,5 @@
 import * as R from 'ramda';
-import * as fs from 'fs-extra-promise';
+import * as fs from 'fs-extra';
 import * as fsPath from 'path';
 import * as jsYaml from 'js-yaml';
 import * as chokidar from 'chokidar';
