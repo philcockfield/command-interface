@@ -1,6 +1,6 @@
 {
   "name": "command-interface",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "description": "Build powerful command-line interfaces from simple ES6 modules.",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
@@ -13,29 +13,29 @@
     "prepare": "yarn run lint && yarn test && yarn run build"
   },
   "dependencies": {
-    "@tdb/log": "1.1.6",
+    "@tdb/log": "1.1.14",
     "@types/fs-extra": "^5.0.4",
     "@types/inquirer": "0.0.43",
-    "@types/ramda": "0.25.42",
+    "@types/ramda": "0.25.46",
     "chokidar": "2.0.4",
     "execa": "1.0.0",
     "fs-extra": "^7.0.1",
     "glob": "7.1.3",
-    "inquirer": "6.2.0",
-    "js-yaml": "3.12.0",
+    "inquirer": "6.2.1",
+    "js-yaml": "3.12.1",
     "listr": "0.14.3",
     "minimist": "1.2.0",
-    "moment": "2.22.2",
+    "moment": "2.23.0",
     "pluralize": "7.0.0",
-    "ramda": "0.26.0",
+    "ramda": "0.26.1",
     "rxjs": "6.3.3"
   },
   "devDependencies": {
-    "@tdb/test": "1.2.2",
-    "@tdb/typescript": "3.1.4",
+    "@tdb/test": "1.2.7",
+    "@tdb/typescript": "3.2.2",
     "@types/chokidar": "1.7.5",
     "@types/glob": "7.1.1",
-    "@types/js-yaml": "3.11.2",
+    "@types/js-yaml": "3.11.4",
     "@types/minimist": "1.2.0"
   },
   "repository": {
