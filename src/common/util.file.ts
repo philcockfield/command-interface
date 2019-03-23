@@ -1,32 +1,4 @@
-import { Glob } from 'glob';
-import { fs, fsPath, chokidar, Subject, Observable, jsYaml } from './libs';
-
-export interface IGlobOptions {
-  nodir?: boolean;
-  dot?: boolean;
-  ignore?: string;
-}
-
-/**
- * Matches the given glob pattern as a promise.
- * See:
- *    https://www.npmjs.com/package/glob
- */
-export function glob(
-  pattern: string,
-  options: IGlobOptions = {},
-): Promise<string[]> {
-  return new Promise<string[]>((resolve, reject) => {
-    new Glob(pattern, options, (err, matches) => {
-      // tslint:disable-line
-      if (err) {
-        reject(err);
-      } else {
-        resolve(matches);
-      }
-    });
-  });
-}
+import { fs, chokidar, Subject, Observable, jsYaml } from './libs';
 
 /**
  * Walks up the folder tree looking for the given file.
@@ -36,8 +8,8 @@ export async function findClosestAncestor(startDir: string, fileName: string) {
     if (!dir || dir === '/') {
       return;
     }
-    const path = fsPath.join(dir, fileName);
-    return (await fs.pathExists(path)) ? path : find(fsPath.resolve(dir, '..'));
+    const path = fs.join(dir, fileName);
+    return (await fs.pathExists(path)) ? path : find(fs.resolve(dir, '..'));
   };
   return find(startDir);
 }
@@ -59,7 +31,7 @@ export async function yaml<T>(filePath: string) {
   let path = '';
   const subpath = filePath.substring(
     0,
-    filePath.length - fsPath.extname(filePath).length,
+    filePath.length - fs.extname(filePath).length,
   );
   const setIfExists = async (ext: string) => {
     if (path) {

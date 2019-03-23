@@ -1,5 +1,5 @@
 import command from './command';
-import { R, file, fsPath, IAction, ICommand, IValidate } from './common';
+import { R, fs, IAction, ICommand, IValidate } from './common';
 
 /**
  * Loads a set of modules and constructs a command object.
@@ -7,8 +7,8 @@ import { R, file, fsPath, IAction, ICommand, IValidate } from './common';
 function toCommand(modulePath: string): ICommand {
   const m = require(modulePath);
   let name;
-  name = m.name ? m.name : fsPath.basename(modulePath, '.js');
-  name = name.endsWith('.cmd') ? fsPath.basename(name, '.cmd') : name;
+  name = m.name ? m.name : fs.basename(modulePath, '.js');
+  name = name.endsWith('.cmd') ? fs.basename(name, '.cmd') : name;
 
   let alias = m.alias;
   if (!R.is(Array, alias)) {
@@ -48,7 +48,7 @@ function toCommands(modulePaths: string[]) {
  * Converts a path/pattern to a command object
  */
 async function pathToCommands(path: string) {
-  const paths = await file.glob(path);
+  const paths = await fs.glob.find(path);
   return toCommands(paths);
 }
 

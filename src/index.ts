@@ -11,7 +11,6 @@ export { log, file, plural, singular } from './common';
 export {
   R,
   fs,
-  fsPath,
   Subject,
   Observable,
   moment,

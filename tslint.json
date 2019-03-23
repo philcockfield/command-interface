@@ -1,3 +1,4 @@
 {
-  "extends": "@tdb/typescript/tslint.json"
+  "extends": "@platform/ts/tslint.json",
+  "rules": {}
 }
