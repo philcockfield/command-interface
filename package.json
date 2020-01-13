@@ -1,6 +1,6 @@
 {
   "name": "command-interface",
-  "version": "4.2.1",
+  "version": "4.2.0",
   "description": "Build powerful command-line interfaces from simple ES6 modules.",
   "main": "./lib/index",
   "typings": "./lib/index.d.ts",
