@@ -1,6 +1,6 @@
 {
   "name": "command-interface",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "description": "Build powerful command-line interfaces from simple ES6 modules.",
   "main": "./lib/index",
   "typings": "./lib/index.d.ts",
@@ -13,21 +13,21 @@
     "prepare": "ts prepare"
   },
   "dependencies": {
-    "@platform/fs": "0.0.42",
-    "@platform/log": "0.0.94",
-    "@types/inquirer": "6.0.0",
-    "@types/js-yaml": "3.12.0",
-    "chokidar": "2.1.5",
+    "@platform/fs": "0.5.1",
+    "@platform/log": "0.1.1",
+    "@types/inquirer": "6.5.0",
+    "@types/js-yaml": "3.12.1",
+    "chokidar": "3.3.1",
     "execa": "1.0.0",
-    "inquirer": "6.2.2",
+    "inquirer": "7.0.3",
     "listr": "0.14.3",
     "minimist": "1.2.0",
     "moment": "2.24.0",
-    "pluralize": "7.0.0"
+    "pluralize": "8.0.0"
   },
   "devDependencies": {
-    "@platform/test": "0.0.35",
-    "@platform/ts": "3.3.70",
+    "@platform/test": "0.1.0",
+    "@platform/ts": "3.7.7",
     "@types/chokidar": "2.1.3",
     "@types/minimist": "1.2.0"
   },

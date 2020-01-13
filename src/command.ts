@@ -3,7 +3,10 @@ import { minimist, R, constants, log, toGroupedCommands } from './common';
 
 const argv: any = minimist(process.argv.slice(2));
 const maxStringLength = (strings: string[]) =>
-  Math.max.apply(null, strings.map(item => item.length));
+  Math.max.apply(
+    null,
+    strings.map(item => item.length),
+  );
 
 export interface IArgument {
   name: string;
